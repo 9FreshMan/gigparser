@@ -37,6 +37,7 @@
 
             </div>
             <div class="col-md-4">
+                <button id="btn" class="buton">close</button>
                 <a onclick="btn_handler()" class="btn btn-primary"
                     style="color: white; height: 40px; position: relative; top: 50px; border-radius: 15px ">Submit</a>
             </div>
@@ -54,11 +55,13 @@
 <script>
     let tg = window.Telegram.WebApp
     tg.expand()
-
+    btn.addEventListener('click', function () {
+        td.close()
+    })
 
     function btn_handler() {
         alert("works")
-        td.close()
+
     }
     function whereAutocomplete() {
         autocomplete = new google.maps.places.Autocomplete(
