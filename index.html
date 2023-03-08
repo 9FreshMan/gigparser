@@ -38,7 +38,7 @@
             </div>
             <div class="col-md-4">
 
-                <input type="text" placeholder="mi around">
+                <input id="radius" type="text" placeholder="mi around">
             </div>
 
         </div>
@@ -61,9 +61,10 @@
     tg.MainButton.setParams({ "color": "#143F6B" }); //так изменяются все параметры 
     tg.MainButton.show()
     Telegram.WebApp.onEvent('mainButtonClicked', function () {
-        tg.sendData(document.getElementById("where").value);
+        tg.sendData(document.getElementById("where").value, document.getElementById("radius"));
         //при клике на основную кнопку отправляем данные в строковом виде
     });
+
 
     function whereAutocomplete() {
         autocomplete = new google.maps.places.Autocomplete(
