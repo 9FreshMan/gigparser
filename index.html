@@ -53,16 +53,19 @@
     async defer></script>
 
 <script>
-    let tg = window.Telegram.WebApp
-    tg.expand()
-    btn.addEventListener('click', function () {
-        td.close()
-    })
+    let tg = window.Telegram.WebApp;
+    tg.expand();
+    tg.MainButton.text = "Changed Text"; //изменяем текст кнопки 
+    tg.MainButton.setText("Changed Text1"); //изменяем текст кнопки иначе
+    tg.MainButton.textColor = "#F55353"; //изменяем цвет текста кнопки
+    tg.MainButton.color = "#143F6B"; //изменяем цвет бэкграунда кнопки
+    tg.MainButton.setParams({ "color": "#143F6B" }); //так изменяются все параметры 
+    tg.MainButton.show()
+    Telegram.WebApp.onEvent('mainButtonClicked', function () {
+        tg.sendData(document.getElementById("where").value);
+        //при клике на основную кнопку отправляем данные в строковом виде
+    });
 
-    function btn_handler() {
-        td.sendData(document.getElementById("where").value);
-
-    }
     function whereAutocomplete() {
         autocomplete = new google.maps.places.Autocomplete(
             document.getElementById('where'),
