@@ -62,7 +62,7 @@
     tg.MainButton.setParams({ "color": "#143F6B" }); //так изменяются все параметры 
     tg.MainButton.show()
     Telegram.WebApp.onEvent('mainButtonClicked', function () {
-        tg.sendData("asdfsadf");
+        tg.sendData(document.getElementById("where").value);
         //при клике на основную кнопку отправляем данные в строковом виде
     });
 
