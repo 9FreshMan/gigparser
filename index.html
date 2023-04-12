@@ -33,7 +33,7 @@
                     Search Location</h2>
                 <input id="search-input" list="search-datalist" type="text" placeholder="City" autocomplete="off"
                     style="color: #04BF7B;text-align: center; width: 100%; height: 40px;border-style:solid; border-radius:25px; border-color: #04BF7B; border-width: 1px;background-color: #212426" />
-                <datalist id="search-datalist"></datalist>
+                <datalist id="search-datalist" size="5"></datalist>
             </div>
             <div class="col-md-8" style="padding-top: 15px;">
 
@@ -78,18 +78,26 @@
             var datalist = document.getElementById('search-datalist');
             var options = '';
 
-            for (var i = 0; i < data.length; i++) {
-                options += '<option value="' + data[i].city + ', ' + data[i].state_id + '">';
-            }
-            datalist.innerHTML = options;
+            var currentSearch = '';
 
             input.addEventListener('input', function () {
-                var inputValue = input.value;
-                var matchingOptions = datalist.querySelectorAll('option[value^="' + inputValue + '"]');
-                for (var i = 0; i < matchingOptions.length; i++) {
-                    console.log(matchingOptions[i].value);
-                }
+                currentSearch = input.value;
+                setTimeout(searchData, 500);
             });
+
+            function searchData() {
+                datalist.innerHTML = '';
+                var matchingData = data.filter(function (item) {
+                    return item.city.toLowerCase().startsWith(currentSearch.toLowerCase());
+                }).slice(0, 20);
+
+                var options = '';
+                for (var i = 0; i < matchingData.length; i++) {
+                    options += '<option value="' + matchingData[i].city + ', ' + matchingData[i].state_id + '">';
+                }
+
+                datalist.innerHTML = options;
+            }
         }
 
         $(document).ready(function () {
