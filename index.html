@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Title</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <!-- JS, Popper.js, and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -47,8 +47,21 @@
 
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+
+        let tg = window.Telegram.WebApp;
+        tg.expand();
+        tg.MainButton.setText("DONE"); //изменяем текст кнопки иначе
+        tg.MainButton.textColor = "#F2F2F2"; //изменяем цвет текста кнопки
+        tg.MainButton.color = "#212426"; //изменяем цвет бэкграунда кнопки
+        tg.MainButton.show()
+        Telegram.WebApp.addEventListener('mainButtonClicked', function () {
+            tg.sendData(document.getElementById("where").value + "\n" + document.getElementById("radius").value);
+            //при клике на основную кнопку отправляем данные в строковом виде
+        });
+
+
 
         function getDataFromCSVFile(csvFile) {
             var data = [];
@@ -93,23 +106,13 @@
         }
 
         $(document).ready(function () {
-            var csvFile = 'uscities.csv';
+            var csvFile = '/addsearch/uscities.csv';
             var data = getDataFromCSVFile(csvFile);
             createAutocomplete(data);
         });
-    let tg = window.Telegram.WebApp;
-    tg.expand();
-    tg.MainButton.setText("DONE"); //изменяем текст кнопки иначе
-    tg.MainButton.textColor = "#F2F2F2"; //изменяем цвет текста кнопки
-    tg.MainButton.color = "#212426"; //изменяем цвет бэкграунда кнопки
-    tg.MainButton.show()
-    Telegram.WebApp.onEvent('mainButtonClicked', function () {
-        tg.sendData(document.getElementById("where").value + "\n" + document.getElementById("radius").value);
-        //при клике на основную кнопку отправляем данные в строковом виде
-    });
 
 
-</script>
+    </script>
 </body>
 
 
